@@ -71,3 +71,23 @@ median(steps.date$steps)
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+1. Create a new factor variable in the dataset with two levels --
+   "weekday" and "weekend" indicating whether a given date is a
+   weekday or weekend day.
+
+```{r, cache=TRUE}
+daytype <- function(date) {
+    if (weekdays(as.Date(date))=="Saturday" | weekdays(as.Date(date))== "Sunday") {
+        "weekend"
+    } else {
+        "weekday"
+    }
+}
+activity$daytype <- as.factor(sapply(activity$date, daytype))
+```
+
+2. Make a panel plot containing a time series plot (i.e. `type = "l"`)
+   of the 5-minute interval (x-axis) and the average number of steps
+   taken, averaged across all weekday days or weekend days
+   (y-axis).
+
