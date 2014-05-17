@@ -1,7 +1,6 @@
 # Reproducible Research: Peer Assessment 1
-
-
-## Loading and preprocessing the data
+# Change working directory to RepData_PeerAssessment1
+# setwd("./RepData_PeerAssigment1")
 ## Loading and preprocessing the data
 
 ```r
@@ -159,4 +158,18 @@ activity$daytype <- as.factor(sapply(activity$date, daytype))
    of the 5-minute interval (x-axis) and the average number of steps
    taken, averaged across all weekday days or weekend days
    (y-axis).
+
+
+
+```r
+schedule <- c("weekend", "weekday")
+par(mfrow = c(2, 1))
+for (type in schedule) {
+    steps.type <- aggregate(steps ~ interval, data = activity, subset = activity$daytype == 
+        type, FUN = mean)
+    plot(steps.type, type = "l", main = type)
+}
+```
+
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
 
